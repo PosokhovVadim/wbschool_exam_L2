@@ -44,14 +44,14 @@ var (
 	n bool // DONE
 	r bool // DONE
 	u bool // DONE
-	M bool // DONE
+	m bool // DONE
 	b bool // DONE
 	c bool // DONE
 	h bool // DONE
 )
 
 var (
-	Months = map[string]int{
+	months = map[string]int{
 		"jan": 1, "feb": 2, "mar": 3,
 		"apr": 4, "may": 5, "jun": 6,
 		"jul": 7, "aug": 8, "sep": 9,
@@ -142,9 +142,9 @@ func compareLines(a, b string) bool {
 		return aNum < bNum
 	}
 
-	if M {
-		aMonth, aOk := Months[akey]
-		bMonth, bOk := Months[bkey]
+	if m {
+		aMonth, aOk := months[akey]
+		bMonth, bOk := months[bkey]
 
 		if aOk && bOk {
 			if r {
@@ -213,7 +213,7 @@ func run() error {
 	flag.BoolVar(&r, "r", false, "reverse sort")
 	flag.BoolVar(&u, "u", false, "skip duplicate lines")
 
-	flag.BoolVar(&M, "M", false, "sort by month name")
+	flag.BoolVar(&m, "M", false, "sort by month name")
 	flag.BoolVar(&b, "b", false, "ignore trailing spaces")
 	flag.BoolVar(&c, "c", false, "check for sorted input")
 	flag.BoolVar(&h, "h", false, "compare human readable numbers")
