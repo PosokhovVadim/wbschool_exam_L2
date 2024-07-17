@@ -1,5 +1,12 @@
 package main
 
+import (
+	"fmt"
+	"os"
+	"sort"
+	"strings"
+)
+
 /*
 === Поиск анаграмм по словарю ===
 
@@ -19,6 +26,55 @@ package main
 Программа должна проходить все тесты. Код должен проходить проверки go vet и golint.
 */
 
-func main() {
+func findAnagrams(words *[]string) *map[string][]string {
+	anagrams := make(map[string][]string)
+	canonicalToWord := make(map[string]string)
 
+	for _, word := range *words {
+		lowerWord := strings.ToLower(word)
+		charsArray := getSortedChars(lowerWord)
+
+		if orig, ok := canonicalToWord[charsArray]; ok {
+			anagrams[orig] = append(anagrams[orig], lowerWord)
+		} else {
+			canonicalToWord[charsArray] = lowerWord
+			anagrams[lowerWord] = []string{word}
+		}
+	}
+
+	for _, v := range anagrams {
+		if len(v) == 1 {
+			delete(anagrams, v[0])
+			continue
+		}
+		sort.Strings(v)
+	}
+	return &anagrams
+}
+
+func getSortedChars(str string) string {
+	runes := []rune(str)
+	sort.Slice(runes, func(i, j int) bool {
+		return runes[i] < runes[j]
+	})
+	return string(runes)
+
+}
+func run() error {
+	var words []string
+
+	words = append(words, os.Args[1:]...)
+
+	anagrams := findAnagrams(&words)
+
+	fmt.Printf("anagrams: %v\n", *anagrams)
+
+	return nil
+}
+
+func main() {
+	if err := run(); err != nil {
+		fmt.Fprintf(os.Stderr, "error: %v\n", err)
+		os.Exit(1)
+	}
 }
