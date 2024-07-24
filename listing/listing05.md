@@ -21,6 +21,9 @@ func test() *customError {
 func main() {
 	var err error
 	err = test()
+	fmt.Printf("Type: %s\n", reflect.TypeOf(err))
+    fmt.Printf("Value: %v\n", reflect.ValueOf(err))
+
 	if err != nil {
 		println("error")
 		return
@@ -31,6 +34,9 @@ func main() {
 
 Ответ:
 ```
-...
+Вывод: 
+error
+
+Произойдет несоотвествие типов (err будет иметь тип customError)
 
 ```
