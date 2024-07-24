@@ -57,7 +57,6 @@ func cut(data []string) []string {
 	for _, line := range data {
 		splitData := strings.Split(line, d)
 
-		fmt.Printf("splitData: %v, len: %v\n", splitData, len(splitData))
 		if s && len(splitData) == 1 {
 			continue
 		}

@@ -36,10 +36,6 @@ import (
 */
 
 var (
-	folderPath = "develop/dev03/" // to run from root
-)
-
-var (
 	k int  // DONE
 	n bool // DONE
 	r bool // DONE
@@ -69,7 +65,7 @@ var suffixes = map[string]float64{
 }
 
 func readFile(inFile string) ([]string, error) {
-	file, err := os.Open(folderPath + inFile)
+	file, err := os.Open(inFile)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
@@ -89,7 +85,7 @@ func readFile(inFile string) ([]string, error) {
 
 func writeFile(lines []string, inFile string) error {
 
-	file, err := os.Create(folderPath + "sorted-" + inFile)
+	file, err := os.Create("sorted-" + inFile)
 
 	if err != nil {
 		return err

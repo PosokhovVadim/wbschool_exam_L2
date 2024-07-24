@@ -38,7 +38,7 @@ func findAnagrams(words *[]string) *map[string][]string {
 			anagrams[orig] = append(anagrams[orig], lowerWord)
 		} else {
 			canonicalToWord[charsArray] = lowerWord
-			anagrams[lowerWord] = []string{word}
+			anagrams[lowerWord] = []string{lowerWord}
 		}
 	}
 
